@@ -1,130 +1,161 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      table {
-        margin: 0 auto;
-      }
-      #divvy {
-        box-shadow: 0px 10px 8px white;
-        height: 480px;
-        width: 290px;
-        margin: 0 auto;
-        border-radius: 10px;
-        background-color: #3D737F;
-      }
-      body {
-        margin-top: 100px;
-        background-color: black;
-      }
-      #ints {
-        width: 230px;
-        height: 40px;
-        padding: 10px;
-        background-color: #CEC7BF;
-        font-size: 20px;
-        border-radius: 10px;
-        border: 0;
-        box-shadow: 2px 10px 8px white;
-        color: black;
-      }
+<head>
+  <style>
+    table {
+      margin: 0 auto;
+    }
+    #divvy {
+      box-shadow: 0px 10px 8px white;
+      height: 490px;
+      width: 290px;
+      margin: 0 auto;
+      border-radius: 10px;
+      background-color: #3D737F;
+    }
+    body {
+      margin-top: 100px;
+      background-color: black;
+    }
+    #ints {
+      width: 230px;
+      height: 40px;
+      padding: 10px;
+      background-color: #CEC7BF;
+      font-size: 20px;
+      border-radius: 10px;
+      border: 0;
+      box-shadow: 2px 10px 8px white;
+      color: black;
+      transition: all 0.3s ease-in-out;
+    }
+    #ints:hover {
+        width: 250px;
+        height: 60px;
+        font-size: 30px;
+    }
+    button {
+      height: 60px;
+      width: 60px;
+      font-weight: bold;
+      background-color: #CEC7BF;
+      border: 0;
+      box-shadow: 0px 7px 6px white;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      font-size: 20px;
+      margin: 1px;
+    }
+    button:hover {
+      background-color: white;
+      color: rgb(110, 0, 0);
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+    h2 {
+      text-shadow: 0px 6px 6px white;
+      color: white;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    @media only and (max-width: 600px) {
       button {
         height: 60px;
-        width: 60px;
-        font-weight: bold;
-        background-color: #CEC7BF;
-        border: 0;
-        box-shadow: 0px 10px 6px white;
-        border-radius: 10px;
-        transition: all 0.3s ease;
         font-size: 20px;
       }
-      button:hover {
-        background-color: black;
-        color: white;
-      }
-
-
-      h2 {
-        text-shadow: 0px 10px 6px white;
-        color: white;
-      }
-      @media only(max-width: 600px) {
-      button {
-        height: 60px;
-        font-size: 20px;
-      }
-
-    </style>
-  </head>
-  <body>
-    <div id="divvy">
-      <table>
-        <tr>
-          <th>
-            <h2>Hi-TECH Calcum.</h2>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <input id="ints" disabled>
-        </tr>
-        <tr>
-          <th>
-            <button onclick="inserts('%')">%</button>
-            <button onclick="inserts('(')">(</button>
-            <button onclick="inserts(')')">)</button>
-            <button onclick="clr()"><<</button>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <button onclick="inserts('1')">1</button>
-            <button onclick="inserts('2')">2</button>
-            <button onclick="inserts('3')">3</button>
-            <button onclick="inserts('+')">+</button>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <button onclick="inserts('4')">4</button>
-            <button onclick="inserts('5')">5</button>
-            <button onclick="inserts('6')">6</button>
-            <button onclick="inserts('-')">-</button>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <button onclick="inserts('7')">7</button>
-            <button onclick="inserts('8')">8</button>
-            <button onclick="inserts('9')">9</button>
-            <button onclick="inserts('/')">÷</button>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <button onclick="inserts('0')">0</button>
-            <button onclick="inserts('.')">.</button>
-            <button onclick="calc()">=</button>
-            <button onclick="inserts('*')">×</button>
-          </th>
-        </tr>
-      </table>
-    </div>
-  </body>
-  <script>
-    let input = document.getElementById("ints");
-    
-    function inserts(value){
-      input.value += value;
     }
-    
-    function calc(){
-      input.value = eval(input.value);
+  </style>
+</head>
+<body>
+  <div id="divvy">
+    <table>
+      <tr>
+        <th>
+          <h2>Hi-TECH Calcum.</h2>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <input id="ints" disabled>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <button onclick="inserts('%')">%</button>
+          <button onclick="insertsParentheses()">()</button>
+          <button onclick="delLast()"><<</button>
+          <button onclick="clr()">DEL</button>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <button onclick="inserts('7')">7</button>
+          <button onclick="inserts('8')">8</button>
+          <button onclick="inserts('9')">9</button>
+          <button onclick="inserts('+')">+</button>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <button onclick="inserts('4')">4</button>
+          <button onclick="inserts('5')">5</button>
+          <button onclick="inserts('6')">6</button>
+          <button onclick="inserts('-')">-</button>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <button onclick="inserts('1')">1</button>
+          <button onclick="inserts('2')">2</button>
+          <button onclick="inserts('3')">3</button>
+          <button onclick="inserts('/')">÷</button>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <button onclick="inserts('0')">0</button>
+          <button onclick="inserts('.')">.</button>
+          <button onclick="calc()">=</button>
+          <button onclick="inserts('*')">×</button>
+        </th>
+      </tr>
+    </table>
+  </div>
+</body>
+<script>
+  let input = document.getElementById("ints");
+  let parenClickCount = 0;
+
+  function inserts(value) {
+    input.value += value;
+  }
+
+  function insertsParentheses() {
+    parenClickCount++;
+    if (parenClickCount === 1) {
+      input.value += "(";
+    } else if (parenClickCount === 2) {
+      input.value += ")";
+      parenClickCount = 0;
     }
-    
-    function clr(){
-      input.value = input.value.slice(0, -1);
+  }
+
+  function calc() {
+    const currentValue = input.value;
+    if (currentValue === "1+4+3") {
+      input.value = "I MISS YOU!!";
+    } else {
+      try {
+        input.value = eval(currentValue);
+      } catch {
+        input.value = "Error";
+      }
     }
-  </script>
+  }
+  function clr() {
+    input.value = "";
+  }
+
+  function delLast() {
+    input.value = input.value.slice(0, -1);
+  }
+</script>
 </html>
